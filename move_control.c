@@ -6,7 +6,7 @@
 /*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:10:08 by falakus           #+#    #+#             */
-/*   Updated: 2025/03/22 16:55:44 by falakus          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:59:52 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	location(t_game *game)
 
 void	flood_fill_test(t_game *game, int p_xloc, int p_yloc)
 {
-	if (game->copy_map[p_yloc][p_xloc] == '1'  || game->copy_map[p_yloc][p_xloc] == 'F' || game->copy_map[p_yloc][p_xloc] == 'E')
+	if (game->copy_map[p_yloc][p_xloc] == '1' ||
+game->copy_map[p_yloc][p_xloc] == 'F' || game->copy_map[p_yloc][p_xloc] == 'E')
 		return ;
 	game->copy_map[p_yloc][p_xloc] = 'F';
 	flood_fill_test(game, p_xloc, p_yloc + 1);
@@ -65,7 +66,10 @@ void	is_everywhere_reachable(t_game *game)
 				print_error(RED"Unreachable items on the map!\n"RESET, game);
 			if (game->copy_map[i][j] == 'E')
 			{
-				if (game->copy_map[i][j + 1] != 'F' && game->copy_map[i][j - 1] != 'F' && game->copy_map[i + 1][j] != 'F' && game->copy_map[i -1 ][j] != 'F')
+				if (game->copy_map[i][j + 1] != 'F' &&
+					game->copy_map[i][j - 1] != 'F' &&
+					game->copy_map[i + 1][j] != 'F' &&
+					game->copy_map[i - 1][j] != 'F')
 					print_error(RED"Unreachable Exit!\n"RESET, game);
 			}
 			j++;

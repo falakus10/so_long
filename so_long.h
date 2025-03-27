@@ -6,7 +6,7 @@
 /*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:48:15 by falakus           #+#    #+#             */
-/*   Updated: 2025/03/22 16:58:15 by falakus          ###   ########.fr       */
+/*   Updated: 2025/03/27 18:55:51 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ char	*check_map_name(t_game *game, char *av);
 void	free_items2(t_game *game);
 void	free_items(t_game *game);
 void	print_error(char *str, t_game *game);
-void	put_images(t_game *game);
+void	put_images(t_game *game, int i, int j);
 void	make_window(t_game *game);
-void	put_images(t_game *game);
 void	is_rectengular(t_game *game);
 void	character_check(t_game *game);
 void	map_control(t_game *game);

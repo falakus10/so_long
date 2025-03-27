@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: austunso <austunso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 18:09:39 by austunso          #+#    #+#             */
-/*   Updated: 2024/10/26 12:01:18 by austunso         ###   ########.fr       */
+/*   Created: 2024/10/16 16:17:16 by falakus           #+#    #+#             */
+/*   Updated: 2024/10/30 20:12:26 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	result;
-	int	i;
+	int					i;
+	int					sign;
+	unsigned long int	result;
 
+	i = 0;
 	sign = 1;
 	result = 0;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
 	{
+		sign = -1;
 		i++;
 	}
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = sign * (-1);
+	else if (str[i] == '+')
 		i++;
-	}
-	while ((str[i] >= 48 && str[i] <= 57))
+	while (ft_isdigit(str[i]))
 	{
-		result = (result * 10) + (str[i] - 48);
+		result *= 10;
+		result += str[i] - '0';
 		i++;
 	}
 	return (result * sign);

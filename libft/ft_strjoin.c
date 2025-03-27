@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: austunso <austunso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 12:14:06 by austunso          #+#    #+#             */
-/*   Updated: 2024/10/17 14:04:59 by austunso         ###   ########.fr       */
+/*   Created: 2024/10/22 20:41:49 by falakus           #+#    #+#             */
+/*   Updated: 2024/10/30 18:54:27 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*ptr;
-	size_t	i;
-	size_t	j;
+	char	*result;
+	int		i;
+	int		j;
 
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	ptr = (char *)malloc(sizeof(char) * ft_strlen(s1) + sizeof(char)
-			* ft_strlen(s2) + 1);
-	if (ptr == NULL)
+	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (result == NULL)
 		return (NULL);
 	i = 0;
-	while (i < ft_strlen(s1))
+	j = 0;
+	while (s1[i] != '\0')
 	{
-		ptr[i] = s1[i];
+		result[i] = s1[i];
 		i++;
 	}
-	j = 0;
-	while (j < ft_strlen(s2))
+	while (s2[j] != '\0')
 	{
-		ptr[i + j] = s2[j];
+		result[i] = s2[j];
 		j++;
+		i++;
 	}
-	ptr[i + j] = '\0';
-	return (ptr);
+	result[i] = '\0';
+	return (result);
 }

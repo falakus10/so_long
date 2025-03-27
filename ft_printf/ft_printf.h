@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:26:00 by falakus           #+#    #+#             */
-/*   Updated: 2024/10/30 18:48:23 by falakus          ###   ########.fr       */
+/*   Created: 2024/11/27 16:04:51 by austunso          #+#    #+#             */
+/*   Updated: 2024/11/29 16:48:49 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		c -= 32;
-	return (c);
-}
+# define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <unistd.h>
+
+int	ft_printf(const char *last, ...);
+int	ft_check_format2(char form, va_list ap);
+int	ft_check_format(char form, va_list ap);
+int	ft_print_digit(long n, int base, char form);
+int	ft_print_address(unsigned long n, unsigned long base);
+int	ft_print_string(char *str);
+int	ft_print_char(int c);
+
+#endif

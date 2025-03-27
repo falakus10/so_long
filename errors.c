@@ -6,13 +6,13 @@
 /*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:23:42 by falakus           #+#    #+#             */
-/*   Updated: 2025/03/22 15:51:27 by falakus          ###   ########.fr       */
+/*   Updated: 2025/03/28 02:20:09 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_items2(t_game *game)
+void	free_items2(t_game *game)
 {
 	mlx_destroy_image(game->mlx->mlx_ptr, game->mlx->player);
 	mlx_destroy_image(game->mlx->mlx_ptr, game->mlx->coin);
@@ -24,30 +24,33 @@ void free_items2(t_game *game)
 	free(game->mlx->mlx_ptr);
 	free(game->mlx);
 }
-void free_items(t_game *game)
+
+void	free_items(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < game->map_height)
+	if (game->map != NULL)
 	{
-		free(game->map[i]);
-		i++;
+		while (i < game->map_height)
+		{
+			free(game->map[i]);
+			i++;
+		}
+		free(game->map);
 	}
-	free (game->map[i]);
-	free(game->map);
-
 	i = 0;
-	while (i < game->map_height)
+	if (game->copy_map != NULL)
 	{
-		free(game->copy_map[i]);
-		i++;
+		while (i < game->map_height)
+		{
+			free(game->copy_map[i]);
+			i++;
+		}
+		free (game->copy_map);
 	}
-	free (game->copy_map[i]);
-	free(game->copy_map);
 	free (game);
 }
-
 
 void	print_error(char *str, t_game *game)
 {
@@ -59,12 +62,7 @@ void	print_error(char *str, t_game *game)
 		free(game);
 		exit(0);
 	}
-	else if(game->copy_map == NULL)
-	{
-		free(game);
-		exit(0);
-	}
-	else	
+	else
 		free_items(game);
-	exit(0);
+	exit (0);
 }

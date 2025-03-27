@@ -3,64 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: austunso <austunso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: falakus <falakus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 15:44:48 by austunso          #+#    #+#             */
-/*   Updated: 2024/10/25 15:10:22 by austunso         ###   ########.fr       */
+/*   Created: 2024/10/22 23:52:23 by falakus           #+#    #+#             */
+/*   Updated: 2024/10/30 20:38:19 by falakus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	int_len(int number)
+static char	*ft_char(char *s, unsigned int number, long int len)
 {
-	int	counter;
-
-	counter = 0;
-	if (number == 0)
-		counter++;
-	if (number < 0)
+	while (number > 0)
 	{
-		number = number * (-1);
-		counter++;
-	}
-	while (number != 0)
-	{
+		s[len--] = 48 + (number % 10);
 		number = number / 10;
-		counter++;
 	}
-	return (counter);
+	return (s);
 }
 
-static void	make_positive(char *ptr, int *flag, long *nn)
+static long int	ft_len(int n)
 {
-	ptr[0] = '-';
-	*nn *= -1;
-	*flag = 1;
+	int	len;
+
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
+	{
+		len++;
+		n = n / 10;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	int		flag;
-	char	*ptr;
-	long	nn;
+	char				*s;
+	long int			len;
+	unsigned int		number;
+	int					sign;
 
-	nn = (long)n;
-	flag = 0;
-	len = int_len(nn);
-	ptr = (char *)malloc(sizeof(char) * (len) + 1);
-	if (ptr == NULL)
+	sign = 1;
+	len = ft_len(n);
+	s = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(s))
 		return (NULL);
-	ptr[len] = '\0';
-	if (nn < 0)
-		make_positive(ptr, &flag, &nn);
-	while (--len > 0)
+	s[len--] = '\0';
+	if (n == 0)
+		s[0] = '0';
+	if (n < 0)
 	{
-		ptr[len] = (nn % 10) + '0';
-		nn = nn / 10;
+		sign *= -1;
+		number = n * -1;
+		s[0] = '-';
 	}
-	if (flag == 0)
-		ptr[0] = nn + '0';
-	return (ptr);
+	else
+		number = n;
+	s = ft_char(s, number, len);
+	return (s);
 }
